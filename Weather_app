@@ -2,7 +2,6 @@ import requests
 import json
 import time
 
-
 API_KEY = 'cb4f53c1eb9193589b4cf83b62f901a1'
 BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
