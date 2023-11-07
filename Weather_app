@@ -1,0 +1,48 @@
+import requests
+import time
+
+API_KEY = "cb4f53c1eb9193589b4cf83b62f901a1"
+
+def get_weather(city_name):
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        temperature = data["main"]["temp"]
+        description = data["weather"][0]["description"]
+        return f"Weather in {city_name}: {description}, Temperature: {temperature}°C"
+    else:
+        return "City not found or an error occurred."
+
+def main():
+    print("Welcome to the Weather Checking App!")
+    favorites = []
+
+    while True:
+        print("\nOptions:")
+        print("1. Check Weather")
+        print("2. Add to Favorites")
+        print("3. View Favorites")
+        print("4. Exit")
+        choice = input("Select an option (1/2/3/4): ")
+
+        if choice == "1":
+            city_name = input("Enter city name: ")
+            print(get_weather(city_name))
+        elif choice == "2":
+            city_name = input("Enter city name to add to favorites: ")
+            favorites.append(city_name)
+            print(f"{city_name} added to favorites.")
+        elif choice == "3":
+            print("Favorites:")
+            for city in favorites:
+                print(city)
+        elif choice == "4":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please select a valid option.")
+
+if __name__ == "__main__":
+    main()
